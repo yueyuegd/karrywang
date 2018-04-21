@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="info.karrywang.mapper.UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="info.karrywang.domain.UserInfo" >
+    <id column="USERID" property="userid" jdbcType="VARCHAR" />
+    <result column="BRANCHID" property="branchid" jdbcType="VARCHAR" />
+    <result column="BYNAME" property="byname" jdbcType="VARCHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+    <result column="OFFICEPHONE" property="officephone" jdbcType="VARCHAR" />
+    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+    <result column="POSITION" property="position" jdbcType="VARCHAR" />
+    <result column="SEX" property="sex" jdbcType="VARCHAR" />
+    <result column="SKILLLEVEL" property="skilllevel" jdbcType="VARCHAR" />
+    <result column="USERNAME" property="username" jdbcType="VARCHAR" />
+    <result column="VALIDCHGREASON" property="validchgreason" jdbcType="VARCHAR" />
+    <result column="VALIDFLAG" property="validflag" jdbcType="VARCHAR" />
+    <result column="ACDQUEUE" property="acdqueue" jdbcType="VARCHAR" />
+    <result column="ACDUSERID" property="acduserid" jdbcType="VARCHAR" />
+    <result column="ACDUSERPWD" property="acduserpwd" jdbcType="VARCHAR" />
+    <result column="ACWSECONDS" property="acwseconds" jdbcType="VARCHAR" />
+    <result column="USERTYPE" property="usertype" jdbcType="VARCHAR" />
+    <result column="trial" property="trial" jdbcType="VARCHAR" />
+    <result column="orderNo" property="orderno" jdbcType="VARCHAR" />
+    <result column="entryMonth" property="entrymonth" jdbcType="INTEGER" />
+    <result column="entryTime" property="entrytime" jdbcType="TIMESTAMP" />
+    <result column="destoryTime" property="destorytime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    USERID, BRANCHID, BYNAME, CREATETIME, EMAIL, MOBILE, OFFICEPHONE, PASSWORD, POSITION, 
+    SEX, SKILLLEVEL, USERNAME, VALIDCHGREASON, VALIDFLAG, ACDQUEUE, ACDUSERID, ACDUSERPWD, 
+    ACWSECONDS, USERTYPE, trial, orderNo, entryMonth, entryTime, destoryTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="info.karrywang.domain.UserInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from s_rbac_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from s_rbac_user
+    where USERID = #{userid,jdbcType=VARCHAR}
+  </select>
+  <insert id="insert" parameterType="info.karrywang.domain.UserInfo" >
+    insert into s_rbac_user (USERID, BRANCHID, BYNAME, 
+      CREATETIME, EMAIL, MOBILE, 
+      OFFICEPHONE, PASSWORD, POSITION, 
+      SEX, SKILLLEVEL, USERNAME, 
+      VALIDCHGREASON, VALIDFLAG, ACDQUEUE, 
+      ACDUSERID, ACDUSERPWD, ACWSECONDS, 
+      USERTYPE, trial, orderNo, 
+      entryMonth, entryTime, destoryTime
+      )
+    values (#{userid,jdbcType=VARCHAR}, #{branchid,jdbcType=VARCHAR}, #{byname,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{officephone,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{skilllevel,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{validchgreason,jdbcType=VARCHAR}, #{validflag,jdbcType=VARCHAR}, #{acdqueue,jdbcType=VARCHAR}, 
+      #{acduserid,jdbcType=VARCHAR}, #{acduserpwd,jdbcType=VARCHAR}, #{acwseconds,jdbcType=VARCHAR}, 
+      #{usertype,jdbcType=VARCHAR}, #{trial,jdbcType=VARCHAR}, #{orderno,jdbcType=VARCHAR}, 
+      #{entrymonth,jdbcType=INTEGER}, #{entrytime,jdbcType=TIMESTAMP}, #{destorytime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="info.karrywang.domain.UserInfo" >
+    insert into s_rbac_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        USERID,
+      </if>
+      <if test="branchid != null" >
+        BRANCHID,
+      </if>
+      <if test="byname != null" >
+        BYNAME,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="mobile != null" >
+        MOBILE,
+      </if>
+      <if test="officephone != null" >
+        OFFICEPHONE,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+      <if test="position != null" >
+        POSITION,
+      </if>
+      <if test="sex != null" >
+        SEX,
+      </if>
+      <if test="skilllevel != null" >
+        SKILLLEVEL,
+      </if>
+      <if test="username != null" >
+        USERNAME,
+      </if>
+      <if test="validchgreason != null" >
+        VALIDCHGREASON,
+      </if>
+      <if test="validflag != null" >
+        VALIDFLAG,
+      </if>
+      <if test="acdqueue != null" >
+        ACDQUEUE,
+      </if>
+      <if test="acduserid != null" >
+        ACDUSERID,
+      </if>
+      <if test="acduserpwd != null" >
+        ACDUSERPWD,
+      </if>
+      <if test="acwseconds != null" >
+        ACWSECONDS,
+      </if>
+      <if test="usertype != null" >
+        USERTYPE,
+      </if>
+      <if test="trial != null" >
+        trial,
+      </if>
+      <if test="orderno != null" >
+        orderNo,
+      </if>
+      <if test="entrymonth != null" >
+        entryMonth,
+      </if>
+      <if test="entrytime != null" >
+        entryTime,
+      </if>
+      <if test="destorytime != null" >
+        destoryTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="branchid != null" >
+        #{branchid,jdbcType=VARCHAR},
+      </if>
+      <if test="byname != null" >
+        #{byname,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="officephone != null" >
+        #{officephone,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="skilllevel != null" >
+        #{skilllevel,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="validchgreason != null" >
+        #{validchgreason,jdbcType=VARCHAR},
+      </if>
+      <if test="validflag != null" >
+        #{validflag,jdbcType=VARCHAR},
+      </if>
+      <if test="acdqueue != null" >
+        #{acdqueue,jdbcType=VARCHAR},
+      </if>
+      <if test="acduserid != null" >
+        #{acduserid,jdbcType=VARCHAR},
+      </if>
+      <if test="acduserpwd != null" >
+        #{acduserpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="acwseconds != null" >
+        #{acwseconds,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        #{usertype,jdbcType=VARCHAR},
+      </if>
+      <if test="trial != null" >
+        #{trial,jdbcType=VARCHAR},
+      </if>
+      <if test="orderno != null" >
+        #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="entrymonth != null" >
+        #{entrymonth,jdbcType=INTEGER},
+      </if>
+      <if test="entrytime != null" >
+        #{entrytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="destorytime != null" >
+        #{destorytime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="info.karrywang.domain.UserInfoExample" resultType="java.lang.Integer" >
+    select count(*) from s_rbac_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update s_rbac_user
+    <set >
+      <if test="record.userid != null" >
+        USERID = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.branchid != null" >
+        BRANCHID = #{record.branchid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.byname != null" >
+        BYNAME = #{record.byname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.email != null" >
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null" >
+        MOBILE = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.officephone != null" >
+        OFFICEPHONE = #{record.officephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        PASSWORD = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.position != null" >
+        POSITION = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        SEX = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skilllevel != null" >
+        SKILLLEVEL = #{record.skilllevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        USERNAME = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.validchgreason != null" >
+        VALIDCHGREASON = #{record.validchgreason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.validflag != null" >
+        VALIDFLAG = #{record.validflag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acdqueue != null" >
+        ACDQUEUE = #{record.acdqueue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acduserid != null" >
+        ACDUSERID = #{record.acduserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acduserpwd != null" >
+        ACDUSERPWD = #{record.acduserpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acwseconds != null" >
+        ACWSECONDS = #{record.acwseconds,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usertype != null" >
+        USERTYPE = #{record.usertype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trial != null" >
+        trial = #{record.trial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderno != null" >
+        orderNo = #{record.orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entrymonth != null" >
+        entryMonth = #{record.entrymonth,jdbcType=INTEGER},
+      </if>
+      <if test="record.entrytime != null" >
+        entryTime = #{record.entrytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.destorytime != null" >
+        destoryTime = #{record.destorytime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update s_rbac_user
+    set USERID = #{record.userid,jdbcType=VARCHAR},
+      BRANCHID = #{record.branchid,jdbcType=VARCHAR},
+      BYNAME = #{record.byname,jdbcType=VARCHAR},
+      CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      MOBILE = #{record.mobile,jdbcType=VARCHAR},
+      OFFICEPHONE = #{record.officephone,jdbcType=VARCHAR},
+      PASSWORD = #{record.password,jdbcType=VARCHAR},
+      POSITION = #{record.position,jdbcType=VARCHAR},
+      SEX = #{record.sex,jdbcType=VARCHAR},
+      SKILLLEVEL = #{record.skilllevel,jdbcType=VARCHAR},
+      USERNAME = #{record.username,jdbcType=VARCHAR},
+      VALIDCHGREASON = #{record.validchgreason,jdbcType=VARCHAR},
+      VALIDFLAG = #{record.validflag,jdbcType=VARCHAR},
+      ACDQUEUE = #{record.acdqueue,jdbcType=VARCHAR},
+      ACDUSERID = #{record.acduserid,jdbcType=VARCHAR},
+      ACDUSERPWD = #{record.acduserpwd,jdbcType=VARCHAR},
+      ACWSECONDS = #{record.acwseconds,jdbcType=VARCHAR},
+      USERTYPE = #{record.usertype,jdbcType=VARCHAR},
+      trial = #{record.trial,jdbcType=VARCHAR},
+      orderNo = #{record.orderno,jdbcType=VARCHAR},
+      entryMonth = #{record.entrymonth,jdbcType=INTEGER},
+      entryTime = #{record.entrytime,jdbcType=TIMESTAMP},
+      destoryTime = #{record.destorytime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="info.karrywang.domain.UserInfo" >
+    update s_rbac_user
+    <set >
+      <if test="branchid != null" >
+        BRANCHID = #{branchid,jdbcType=VARCHAR},
+      </if>
+      <if test="byname != null" >
+        BYNAME = #{byname,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="officephone != null" >
+        OFFICEPHONE = #{officephone,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        POSITION = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="skilllevel != null" >
+        SKILLLEVEL = #{skilllevel,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="validchgreason != null" >
+        VALIDCHGREASON = #{validchgreason,jdbcType=VARCHAR},
+      </if>
+      <if test="validflag != null" >
+        VALIDFLAG = #{validflag,jdbcType=VARCHAR},
+      </if>
+      <if test="acdqueue != null" >
+        ACDQUEUE = #{acdqueue,jdbcType=VARCHAR},
+      </if>
+      <if test="acduserid != null" >
+        ACDUSERID = #{acduserid,jdbcType=VARCHAR},
+      </if>
+      <if test="acduserpwd != null" >
+        ACDUSERPWD = #{acduserpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="acwseconds != null" >
+        ACWSECONDS = #{acwseconds,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        USERTYPE = #{usertype,jdbcType=VARCHAR},
+      </if>
+      <if test="trial != null" >
+        trial = #{trial,jdbcType=VARCHAR},
+      </if>
+      <if test="orderno != null" >
+        orderNo = #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="entrymonth != null" >
+        entryMonth = #{entrymonth,jdbcType=INTEGER},
+      </if>
+      <if test="entrytime != null" >
+        entryTime = #{entrytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="destorytime != null" >
+        destoryTime = #{destorytime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where USERID = #{userid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="info.karrywang.domain.UserInfo" >
+    update s_rbac_user
+    set BRANCHID = #{branchid,jdbcType=VARCHAR},
+      BYNAME = #{byname,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      MOBILE = #{mobile,jdbcType=VARCHAR},
+      OFFICEPHONE = #{officephone,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      POSITION = #{position,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=VARCHAR},
+      SKILLLEVEL = #{skilllevel,jdbcType=VARCHAR},
+      USERNAME = #{username,jdbcType=VARCHAR},
+      VALIDCHGREASON = #{validchgreason,jdbcType=VARCHAR},
+      VALIDFLAG = #{validflag,jdbcType=VARCHAR},
+      ACDQUEUE = #{acdqueue,jdbcType=VARCHAR},
+      ACDUSERID = #{acduserid,jdbcType=VARCHAR},
+      ACDUSERPWD = #{acduserpwd,jdbcType=VARCHAR},
+      ACWSECONDS = #{acwseconds,jdbcType=VARCHAR},
+      USERTYPE = #{usertype,jdbcType=VARCHAR},
+      trial = #{trial,jdbcType=VARCHAR},
+      orderNo = #{orderno,jdbcType=VARCHAR},
+      entryMonth = #{entrymonth,jdbcType=INTEGER},
+      entryTime = #{entrytime,jdbcType=TIMESTAMP},
+      destoryTime = #{destorytime,jdbcType=TIMESTAMP}
+    where USERID = #{userid,jdbcType=VARCHAR}
+  </update>
+</mapper>
